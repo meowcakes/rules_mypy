@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package rokt.featurestore.dsl.v1;
+package mypy_bazel.proto;
 
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
