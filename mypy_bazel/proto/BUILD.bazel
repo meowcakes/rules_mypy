@@ -1,0 +1,11 @@
+load("//mypy_rules:proto.bzl", "py_proto_library")
+
+py_proto_library(
+    name = "foo_py_pb2",
+    srcs = ["foo.proto"],
+    deps = [
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
