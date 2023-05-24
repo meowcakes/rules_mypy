@@ -1,4 +1,4 @@
-workspace(name = "mypy_bazel")
+workspace(name = "rules_mypy")
 
 load("//repositories:deps.bzl", "deps")
 

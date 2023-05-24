@@ -7,11 +7,12 @@ load("@rules_proto_grpc//:repositories.bzl", "rules_proto_grpc_repos", "rules_pr
 load("@rules_proto_grpc//python:repositories.bzl", rules_proto_grpc_python_repos = "python_repos")
 load("@rules_python//python:pip.bzl", "pip_parse")
 
-def setup(python_interpreter_target = None):
+def setup(python_interpreter_target = None, requirements_file = "@rules_mypy//:requirements_lock.txt"):
     """Setup dependencies.
 
     Args:
-        python_interpreter_target: Python interpreter target to use for installing pypi deps.
+        python_interpreter_target: The python interpreter target to use for installing pypi deps.
+        requirements_file: The requirements file containing mypy, mypy-protobuf and types-protobuf pip packages to use.
     """
 
     rules_proto_grpc_toolchains()
@@ -31,5 +32,5 @@ def setup(python_interpreter_target = None):
     pip_parse(
         name = "mypy_pypi",
         python_interpreter_target = python_interpreter_target,
-        requirements = "//:requirements_lock.txt",
+        requirements = requirements_file,
     )
