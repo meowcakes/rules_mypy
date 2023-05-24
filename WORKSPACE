@@ -39,12 +39,12 @@ load("@python3_10//:defs.bzl", "interpreter")
 load("@rules_python//python:pip.bzl", "pip_parse")
 
 pip_parse(
-    name = "pypi",
+    name = "mypy_pypi",
     python_interpreter_target = interpreter,
     requirements_lock = "//:requirements_lock.txt",
 )
 
-load("@pypi//:requirements.bzl", "install_deps")
+load("@mypy_pypi//:requirements.bzl", "install_deps")
 
 install_deps()
 
@@ -64,4 +64,5 @@ http_archive(
 )
 
 load("@aspect_rules_py//py:repositories.bzl", "rules_py_dependencies")
+
 rules_py_dependencies()

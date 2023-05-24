@@ -1,1 +1,43 @@
-exports_files(["mypy.ini"])
+load("@aspect_rules_py//py:defs.bzl", "py_binary")
+load("@mypy_pypi//:requirements.bzl", "requirement")
+load("@rules_proto_grpc//:defs.bzl", "proto_plugin")
+
+exports_files([
+    "mypy.ini",
+    "mypy.py",
+    "mypy.bash.tpl",
+])
+
+proto_plugin(
+    name = "mypy_plugin",
+    outputs = ["{protopath|python}_pb2.pyi"],
+    tool = "@mypy_pypi_mypy_protobuf//:rules_python_wheel_entry_point_protoc-gen-mypy",
+    visibility = ["//visibility:public"],
+)
+
+proto_plugin(
+    name = "grpc_mypy_plugin",
+    outputs = ["{protopath|python}_pb2_grpc.pyi"],
+    tool = "@mypy_pypi_mypy_protobuf//:rules_python_wheel_entry_point_protoc-gen-mypy_grpc",
+    visibility = ["//visibility:public"],
+)
+
+label_flag(
+    name = "mypy_ini",
+    build_setting_default = "//:mypy.ini",
+    visibility = ["//visibility:public"],
+)
+
+label_flag(
+    name = "mypy_dep",
+    build_setting_default = requirement("mypy"),
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "mypy_bin",
+    srcs = ["//:mypy.py"],
+    main = "//:mypy.py",
+    visibility = ["//visibility:public"],
+    deps = [requirement("mypy")],
+)

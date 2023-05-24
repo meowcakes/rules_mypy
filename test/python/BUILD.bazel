@@ -1,21 +1,20 @@
-load("//mypy_rules:python.bzl", "py_library")
-load("@pypi//:requirements.bzl", "requirement")
+load("@mypy_pypi//:requirements.bzl", "requirement")
+load("//:python.bzl", "py_library")
 
 py_library(
     name = "foo_passes",
     srcs = ["foo_passes.py"],
     deps = [
-        "//mypy_bazel/proto:foo_py_pb2",
+        "//test/proto/v1:foo_py_pb2",
         requirement("types-protobuf"),
-    ]
+    ],
 )
 
 py_library(
     name = "foo_fails",
     srcs = ["foo_fails.py"],
     deps = [
-        "//mypy_bazel/proto:foo_py_pb2",
+        "//test/proto/v1:foo_py_pb2",
         requirement("types-protobuf"),
-    ]
+    ],
 )
-
