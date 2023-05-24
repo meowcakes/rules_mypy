@@ -1,6 +1,7 @@
 load("@aspect_rules_py//py:defs.bzl", "py_binary")
 load("@mypy_pypi//:requirements.bzl", "requirement")
 load("@rules_proto_grpc//:defs.bzl", "proto_plugin")
+load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 
 exports_files([
     "mypy.ini",
@@ -40,4 +41,10 @@ py_binary(
     main = "//:mypy.py",
     visibility = ["//visibility:public"],
     deps = [requirement("mypy")],
+)
+
+compile_pip_requirements(
+    name = "requirements",
+    requirements_in = "requirements.txt",
+    requirements_txt = "requirements_lock.txt",
 )
