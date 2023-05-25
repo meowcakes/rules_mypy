@@ -103,8 +103,8 @@ def _mypy_test_macro(name, **kwargs):
     # TODO(meowcakes): put mypy into a toolchain
     _py_binary(
         name = name + "_mypy_bin",
-        srcs = ["//:mypy.py"],
-        main = "//:mypy.py",
+        srcs = ["@rules_mypy//:mypy.py"],
+        main = "@rules_mypy//:mypy.py",
         deps = kwargs.get("deps", []) + [requirement("mypy")],
         visibility = ["//visibility:private"],
     )

@@ -29,20 +29,6 @@ label_flag(
     visibility = ["//visibility:public"],
 )
 
-label_flag(
-    name = "mypy_dep",
-    build_setting_default = requirement("mypy"),
-    visibility = ["//visibility:public"],
-)
-
-py_binary(
-    name = "mypy_bin",
-    srcs = ["//:mypy.py"],
-    main = "//:mypy.py",
-    visibility = ["//visibility:public"],
-    deps = [requirement("mypy")],
-)
-
 compile_pip_requirements(
     name = "requirements",
     requirements_in = "requirements.txt",
